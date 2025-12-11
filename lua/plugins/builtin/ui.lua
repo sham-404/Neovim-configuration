@@ -1,6 +1,29 @@
 return {
-  -- Noice (commandline + messages)
 
+  {
+    "rcarriga/nvim-notify",
+    event = "VeryLazy",
+    config = function()
+      local notify = require("notify")
+
+      notify.setup({
+        stages = "fade_in_slide_out",
+        timeout = 3000,
+        top_down = true, -- stack downward
+        max_width = 80,
+        max_height = 30,
+        render = "minimal",
+        background_colour = "#000000",
+
+        -- ⭐ THE IMPORTANT PART
+        position = "top_right",
+      })
+
+      vim.notify = notify
+    end,
+  },
+
+  -- Noice (commandline + messages)
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -46,13 +69,37 @@ return {
   },
 
   -- Statusline
+
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "SmiteshP/nvim-navic",
+    },
     event = "VeryLazy",
+
     config = function()
+      local navic = require("nvim-navic")
+
       require("lualine").setup({
-        options = { theme = "material" },
+        options = {
+          theme = "material",
+          globalstatus = true,
+        },
+
+        sections = {
+          lualine_c = {
+            { "filename" },
+            {
+              function()
+                return navic.get_location()
+              end,
+              cond = function()
+                return navic.is_available()
+              end,
+            },
+          },
+        },
       })
     end,
   },

@@ -35,6 +35,7 @@ map("n", "<leader>q", "<cmd>qa<CR>", { desc = "Quit all" }) -- Changed to qa to 
 -----------------------------------------------------------
 -- TELESCOPE
 -----------------------------------------------------------
+map("n", "<leader><leader>", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Buffers" })
@@ -51,7 +52,7 @@ map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
 map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
 map("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
 map("n", "K", vim.lsp.buf.hover, { desc = "Hover docs" })
-map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
+map("n", "<leader>Rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 
 -----------------------------------------------------------
