@@ -9,13 +9,11 @@ return {
       notify.setup({
         stages = "fade_in_slide_out",
         timeout = 3000,
-        top_down = true, -- stack downward
+        top_down = true,
         max_width = 80,
         max_height = 30,
         render = "minimal",
         background_colour = "#000000",
-
-        -- ⭐ THE IMPORTANT PART
         position = "top_right",
       })
 
@@ -23,53 +21,38 @@ return {
     end,
   },
 
-  -- Noice (commandline + messages)
+  -- Noice
   {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
       presets = {
-        command_palette = true, -- enable the Lazy-like popup
+        command_palette = true,
       },
 
       views = {
         cmdline_popup = {
-          position = {
-            row = 5, -- move DOWN from top; adjust to taste
-            col = "50%", -- center horizontally
-          },
-          size = {
-            width = 60, -- typical LazyVim width
-            height = "auto",
-          },
+          position = { row = 5, col = "50%" },
+          size = { width = 60, height = "auto" },
         },
 
         popupmenu = {
           relative = "editor",
-          position = {
-            row = 8, -- popupmenu appears below the command line
-            col = "50%",
-          },
-          size = {
-            width = 60,
-            height = 10,
-          },
-          border = {
-            style = "rounded",
-            padding = { 1, 2 },
-          },
+          position = { row = 8, col = "50%" },
+          size = { width = 60, height = 10 },
+          border = { style = "rounded", padding = { 1, 2 } },
         },
       },
     },
   },
-  -- Dressing (input/select UI)
+
+  -- Dressing
   {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
   },
 
-  -- Statusline
-
+  -- Lualine (modified)
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
@@ -81,9 +64,15 @@ return {
     config = function()
       local navic = require("nvim-navic")
 
+      -- Save your current material style
+      local original = vim.g.material_style
+
+      -- Load Deep Ocean palette for lualine
+      vim.g.material_style = "deep ocean"
+
       require("lualine").setup({
         options = {
-          theme = "material",
+          theme = "material-nvim", -- loads the Deep Ocean palette now
           globalstatus = true,
         },
 
@@ -101,6 +90,9 @@ return {
           },
         },
       })
+
+      -- Restore your actual theme (e.g., "darker")
+      vim.g.material_style = original
     end,
   },
 
@@ -137,5 +129,24 @@ return {
     "echasnovski/mini.icons",
     version = false,
     lazy = true,
+  },
+
+  {
+    "declancm/cinnamon.nvim",
+    version = "*", -- use latest release
+    opts = {
+      keymaps = {
+        basic = true,
+        extra = true,
+      },
+      options = {
+        mode = "window",
+        -- decreasing this makes the movement feel "snappier"
+        -- Default is often ~1000ms, which is too slow for power users
+        max_delta = {
+          time = 250, -- Complete ANY scroll within 300ms
+        },
+      },
+    },
   },
 }
