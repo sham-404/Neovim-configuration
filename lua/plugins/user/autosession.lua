@@ -37,10 +37,26 @@
 return {
   {
     "rmagatti/auto-session",
+    lazy = false,
     opts = {
       log_level = "error",
+
+      -- ❌ never auto-restore anything
       auto_restore_enabled = false,
       auto_session_enable_last_session = false,
+
+      -- 🚫 do NOT auto-create sessions
+      auto_session_create_enabled = false,
+
+      -- ✅ auto-save ONLY if a session exists
+      auto_save_enabled = true,
+
+      -- 🧹 ignore junk dirs
+      auto_session_suppress_dirs = {
+        "~/",
+        "~/Downloads",
+        "/",
+      },
     },
   },
 }

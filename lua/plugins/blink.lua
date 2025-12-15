@@ -8,7 +8,7 @@ return {
       preset = "default",
 
       ["<CR>"] = { "accept", "fallback" }, -- FIXED
-      ["<Tab>"] = { "select_next" },
+      ["<Tab>"] = { "select_next", "fallback" },
       ["<S-Tab>"] = { "select_prev" },
     },
 
