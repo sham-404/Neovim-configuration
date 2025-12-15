@@ -53,50 +53,90 @@ return {
   },
 
   -- Lualine (modified)
+
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "SmiteshP/nvim-navic",
-    },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
-
     config = function()
-      local navic = require("nvim-navic")
+      local function ram_usage()
+        local mem = {}
+        for line in io.lines("/proc/meminfo") do
+          local k, v = line:match("(%w+):%s+(%d+)")
+          if k and v then
+            mem[k] = tonumber(v)
+          end
+        end
+        if not mem.MemTotal or not mem.MemAvailable then
+          return "󰍛 ?"
+        end
+        local used = mem.MemTotal - mem.MemAvailable
+        local percent = math.floor((used / mem.MemTotal) * 100)
+        return "󰍛 " .. percent .. "%%"
+      end
 
-      -- Save your current material style
-      local original = vim.g.material_style
+      local function clock()
+        return " " .. os.date("%H:%M")
+      end
 
-      -- Load Deep Ocean palette for lualine
-      vim.g.material_style = "deep ocean"
+      local function smart_filename()
+        local name = vim.fn.expand("%:t")
+        if name == "" then
+          return ""
+        end
+        return name
+      end
 
+      local function smart_progress()
+        local current = vim.fn.line(".")
+        local total = vim.fn.line("$")
+
+        if total == 0 then
+          return ""
+        end
+
+        local percent = math.floor((current / total) * 100)
+
+        if percent <= 5 then
+          return "TOP"
+        elseif percent >= 95 then
+          return "BOT"
+        else
+          return percent .. "%%"
+        end
+      end
+
+      vim.api.nvim_set_hl(0, "LualinePill", { bg = "#0f1419", fg = "#c0caf5" })
       require("lualine").setup({
-        options = {
-          theme = "material-nvim", -- loads the Deep Ocean palette now
-          globalstatus = true,
-        },
-
+        options = { theme = "auto", globalstatus = true },
         sections = {
           lualine_c = {
-            { "filename" },
             {
-              function()
-                return navic.get_location()
-              end,
+              smart_filename,
               cond = function()
-                return navic.is_available()
+                return vim.fn.expand("%:t") ~= ""
               end,
             },
           },
+
+          lualine_x = {
+            "filetype",
+          },
+
+          lualine_y = {
+            {
+              smart_progress,
+              padding = { left = 1, right = 1 },
+            },
+            { ram_usage, separator = { left = "" } },
+          },
+
+          lualine_z = { { clock, padding = { left = 1, right = 1 } } },
         },
+        inactive_sections = { lualine_c = {}, lualine_y = {}, lualine_z = {} },
       })
-
-      -- Restore your actual theme (e.g., "darker")
-      vim.g.material_style = original
     end,
-  },
-
-  -- Bufferline
+  }, -- Bufferline
   {
     "akinsho/bufferline.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
