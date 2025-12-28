@@ -1,5 +1,6 @@
 -- 1. Bootstrap Lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -22,3 +23,13 @@ require("lazy").setup({
   { import = "plugins" },
   { import = "plugins.user" },
 })
+if vim.g.neovide then
+  vim.g.neovide_scale_factor = 1
+  vim.g.neovide_opacity = 0.95
+  vim.g.neovide_background_color = "#0f1117"
+  vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_cursor_trail_size = 0
+
+  vim.o.guifont = "Consolas,FiraCode Nerd Font:h9.5"
+  vim.g.neovide_disable_ligatures = true
+end

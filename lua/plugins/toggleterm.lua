@@ -4,7 +4,7 @@ return {
     version = "*",
     opts = {
       -- This is your DEFAULT direction for your main terminal
-      direction = "horizontal",
+      direction = "float",
       size = 12,
       open_mapping = [[<c-\>]],
     },

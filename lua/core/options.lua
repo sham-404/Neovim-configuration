@@ -13,9 +13,10 @@ opt.smartindent = true
 opt.wrap = false
 opt.cursorline = true
 opt.scrolloff = 8
+opt.smoothscroll = true
 
 opt.laststatus = 3 -- global statusline
 
 opt.fillchars:append({ eob = " " })
 
-vim.opt.clipboard = "unnamedplus"
+opt.clipboard = "unnamedplus"

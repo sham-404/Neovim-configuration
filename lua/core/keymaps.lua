@@ -123,3 +123,7 @@ map("n", "<leader>sn", "<cmd>NoiceHistory<CR>", { desc = "Notification history" 
 
 -- Custom Escape
 map("i", "fd", "<Esc>", { desc = "Escape" })
+
+map("n", "<leader>ch", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle Inlay Hints" })
