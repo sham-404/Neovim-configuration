@@ -46,12 +46,6 @@ return {
     },
   },
 
-  -- Dressing
-  {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
-  },
-
   -- Lualine (modified)
 
   {
@@ -188,6 +182,9 @@ return {
       hl("LualineRamMid", "#f9e2af") -- yellow
       hl("LualineRamHigh", "#f38ba8") -- red
 
+      --      vim.api.nvim_set_hl(0, "StatusLine", { bg = "#000000" })
+      --      vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "#000000" })
+
       -- Separator color
       hl("LualineSep", "#cdd6f4")
 
@@ -222,148 +219,24 @@ return {
     end,
   },
 
-  -- {
-  --   "akinsho/bufferline.nvim",
-  --   version = "*",
-  --   dependencies = "nvim-tree/nvim-web-devicons",
-  --   config = function()
-  --     require("bufferline").setup({
-  --       options = {
-  --         mode = "buffers",
-  --         numbers = "none",
-
-  --         separator_style = "slant", -- safe & nice
-  --         indicator = {
-  --           style = "icon",
-  --           icon = "▎",
-  --         },
-
-  --         modified_icon = "●",
-  --         close_icon = "",
-  --         left_trunc_marker = "",
-  --         right_trunc_marker = "",
-
-  --         diagnostics = "nvim_lsp", -- let bufferline handle it
-  --         diagnostics_update_in_insert = false,
-
-  --         offsets = {
-  --           {
-  --             filetype = "neo-tree",
-  --             text = "File Explorer",
-  --             highlight = "Directory",
-  --             separator = true,
-  --           },
-  --         },
-
-  --         show_buffer_icons = true,
-  --         show_buffer_close_icons = false,
-  --         show_close_icon = false,
-  --         always_show_bufferline = true,
-  --       },
-
-  --       -- IMPORTANT: solid colors so text doesn’t wash out
-  --       highlights = {
-  --         fill = {
-  --           bg = "#0d0d0e",
-  --         },
-
-  --         background = {
-  --           bg = "#0d0d0e",
-  --           fg = "#6c7086",
-  --         },
-
-  --         buffer_visible = {
-  --           bg = "#0d0d0e",
-  --           fg = "#cdd6f4",
-  --         },
-
-  --         buffer_selected = {
-  --           bg = "#1c1c1f",
-  --           fg = "#ffffff",
-  --           bold = true,
-  --         },
-
-  --         separator = {
-  --           fg = "#0d0d0e",
-  --           bg = "#0d0d0e",
-  --         },
-
-  --         separator_selected = {
-  --           fg = "#0d0d0e",
-  --           bg = "#1c1c1f",
-  --         },
-
-  --         indicator_selected = {
-  --           fg = "#89b4fa",
-  --           bg = "#1c1c1f",
-  --         },
-
-  --         modified = {
-  --           fg = "#f9e2af",
-  --           bg = "#0d0d0e",
-  --         },
-
-  --         modified_selected = {
-  --           fg = "#f9e2af",
-  --           bg = "#1c1c1f",
-  --         },
-  --       },
-  --     })
-  --   end,
-  -- },
-
   {
     "akinsho/bufferline.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
     event = "VeryLazy",
-    opts = {
-      options = {
-        mode = "buffers",
-        separator_style = "slant",
-        diagnostics = "nvim_lsp",
-      },
-    },
+    config = function()
+      require("bufferline").setup({
+        options = {
+          mode = "buffers",
+          separator_style = "slant",
+          diagnostics = "nvim_lsp",
+          show_buffer_close_icons = false,
+          show_close_icon = false,
+          indicator = { style = "icon" },
+        },
+      })
+    end,
   },
 
-  --  {
-  --    "kdheepak/tabline.nvim",
-  --    dependencies = {
-  --      "nvim-lualine/lualine.nvim",
-  --      "nvim-tree/nvim-web-devicons",
-  --    },
-  --    config = function()
-  --      require("lualine").setup({
-  --        options = {
-  --          theme = "material",
-  --          section_separators = { left = "|", right = "" },
-  --          component_separators = { left = "|", right = "|" },
-  --          globalstatus = true,
-  --        },
-  --        tabline = {
-  --          lualine_a = {
-  --            {
-  --              "buffers",
-  --              mode = 2,
-  --              padding = { left = 2, right = 2 },
-  --              symbols = {
-  --                modified = " ●",
-  --                alternate_file = "",
-  --                directory = "",
-  --              },
-  --            },
-  --          },
-  --          lualine_y = {
-  --            {
-  --              "tabs",
-  --              mode = 2,
-  --              padding = { left = 2, right = 2 },
-  --            },
-  --          },
-  --        },
-  --      })
-  --    end,
-  --  },
-  -- Indent Guides
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
@@ -375,12 +248,5 @@ return {
         enabled = false,
       },
     },
-  },
-
-  -- Icons
-  {
-    "echasnovski/mini.icons",
-    version = false,
-    lazy = true,
   },
 }

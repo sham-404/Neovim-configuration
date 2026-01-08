@@ -13,16 +13,19 @@ return {
     local darker_bg = "#0b0b0c"
 
     return {
+
       custom_highlights = function(colors)
+        local darker_bg = "#0b0b0c"
+
         return {
           -- Cursor pop
           Cursor = { bg = "#5F8787", fg = "#000000" },
 
-          -- Deeper matte background, still Deep Ocean
+          -- Backgrounds
           Normal = { bg = darker_bg },
           NormalNC = { bg = darker_bg },
 
-          -- Floats & borders
+          -- Floats
           NormalFloat = { bg = "#0d0d0e" },
           FloatBorder = { fg = "#2c2c2f", bg = "#0d0d0e" },
 

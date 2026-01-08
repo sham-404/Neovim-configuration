@@ -11,9 +11,6 @@ return {
     config = function(_, opts)
       require("toggleterm").setup(opts)
 
-      function _G.set_terminal_keymaps()
-        vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { noremap = true, desc = "Exit terminal mode" })
-      end
       vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
     end,
     keys = {

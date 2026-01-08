@@ -10,6 +10,23 @@ return {
     -- 1. Setup Mason
     require("mason").setup()
 
+    require("blink.cmp").setup({
+      completion = {
+        trigger = {
+          show_on_insert = true,
+          show_on_keyword = true,
+        },
+      },
+      sources = {
+        default = {
+          "lsp",
+          "buffer",
+          "snippets",
+          "path",
+        },
+      },
+    })
+
     -- 2. Capabilities (Use BLINK, not cmp_nvim_lsp)
     -- This handles the communication between the LSP and your completion menu
     local capabilities = require("blink.cmp").get_lsp_capabilities()

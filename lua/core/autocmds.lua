@@ -5,3 +5,4 @@ autocmd("TextYankPost", {
     vim.highlight.on_yank({ higroup = "Visual", timeout = 80 })
   end,
 })
+

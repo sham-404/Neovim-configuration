@@ -81,11 +81,21 @@ map("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
 map("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 
+-- Move lines up and down (LazyVim style)
+
+-- Normal mode
+map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down", silent = true })
+map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up", silent = true })
+
+-- Visual mode
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up", silent = true })
+
 -- Resize with Arrows
-map("n", "<C-Up>", ":resize +2<CR>", { desc = "Increase window height" })
-map("n", "<C-Down>", ":resize -2<CR>", { desc = "Decrease window height" })
-map("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Decrease window width" })
-map("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Increase window width" })
+map("n", "<C-Up>", ":resize +2<CR>", { desc = "Increase window height", silent = true })
+map("n", "<C-Down>", ":resize -2<CR>", { desc = "Decrease window height", silent = true })
+map("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Decrease window width", silent = true })
+map("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Increase window width", silent = true })
 
 -----------------------------------------------------------
 -- BUFFERS (H/L Style)
@@ -123,6 +133,7 @@ map("n", "<leader>sn", "<cmd>NoiceHistory<CR>", { desc = "Notification history" 
 
 -- Custom Escape
 map("i", "fd", "<Esc>", { desc = "Escape" })
+map("t", "<esc>", [[<C-\><C-n>]], { noremap = true, desc = "Exit terminal mode" })
 
 map("n", "<leader>ch", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
