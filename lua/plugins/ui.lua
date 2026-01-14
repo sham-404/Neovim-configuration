@@ -224,14 +224,85 @@ return {
     dependencies = "nvim-tree/nvim-web-devicons",
     event = "VeryLazy",
     config = function()
+      -- Define your colors here for easy tweaking
+      local active_text_color = "#000000" -- black
+      local active_bg_color = "#74c7ec" -- cyan
+
       require("bufferline").setup({
         options = {
+          always_show_bufferline = true,
           mode = "buffers",
           separator_style = "slant",
           diagnostics = "nvim_lsp",
-          show_buffer_close_icons = false,
-          show_close_icon = false,
           indicator = { style = "icon" },
+        },
+        highlights = {
+
+          -- 1. Main Selected Buffer Text
+          buffer_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            bold = true,
+            italic = false,
+          },
+
+          separator_selected = {
+            fg = "#060606",
+            bg = active_bg_color,
+          },
+
+          -- 3. The Indicator (Left side icon/bar)
+          indicator_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+          },
+
+          modified_selected = {
+            fg = "#a61818", -- Keep reddish text for modified status
+            bg = active_bg_color, -- Force background to remain cyan
+          },
+
+          error_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            sp = active_text_color,
+            bold = true,
+          },
+
+          warning_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            sp = active_text_color,
+            bold = true,
+          },
+
+          info_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            sp = active_text_color,
+            bold = true,
+          },
+
+          hint_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            sp = active_text_color,
+            bold = true,
+          },
+
+          close_button_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            sp = active_text_color,
+            bold = true,
+          },
+
+          -- Diagnostic styles for the actual icon/text next to the filename
+          diagnostic_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            bold = true,
+          },
         },
       })
     end,
