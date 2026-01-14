@@ -5,6 +5,26 @@ return {
   config = function()
     require("transparent").setup({
       exclude_groups = {
+        -- main bar
+        "BufferLineFill",
+        "BufferLineBackground",
+        "BufferLineBufferVisible",
+        "BufferLineBufferSelected",
+        "BufferLineSeparator",
+        "BufferLineSeparatorVisible",
+        "BufferLineSeparatorSelected",
+
+        -- tabs & icons
+        "BufferLineTab",
+        "BufferLineTabSelected",
+        "BufferLineTabClose",
+        "BufferLineCloseButton",
+        "BufferLineCloseButtonVisible",
+        "BufferLineCloseButtonSelected",
+        "BufferLineDevIconDefault",
+        "BufferLineDevIconSelected",
+        "BufferLineDevIconVisible",
+
         "LualineProg",
         "LualineBatOk",
         "LualineBatMid",
