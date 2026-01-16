@@ -20,3 +20,5 @@ opt.laststatus = 3 -- global statusline
 opt.fillchars:append({ eob = " " })
 
 opt.clipboard = "unnamedplus"
+
+opt.shell = "/usr/bin/zsh"
