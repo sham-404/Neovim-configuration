@@ -21,6 +21,8 @@ return {
           return {
             -- Cursor pop
             Cursor = { bg = "#5F8787", fg = "#000000" },
+            -- iCursor = { bg = "#ffffff", fg = "#000000" },
+
 
             -- Backgrounds
             Normal = { bg = darker_bg },

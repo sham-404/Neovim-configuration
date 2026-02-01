@@ -100,7 +100,7 @@ return {
           end,
 
           ----------------------------------------------------------------------
-          -- JS / LUA / SH / DART
+          -- JS / LUA / SH / DART / ZIG
           ----------------------------------------------------------------------
           javascript = function()
             return string.format("node %s$end", vim.fn.shellescape(vim.fn.expand("%:p")))
@@ -116,7 +116,13 @@ return {
 
           dart = function()
             return string.format("dart run %s$end", vim.fn.shellescape(vim.fn.expand("%:p")))
+          end, 
+
+          zig = function()
+            return string.format("zig run %s$end", vim.fn.shellescape(vim.fn.expand("%:p")))
           end,
+
+
         },
       })
 
