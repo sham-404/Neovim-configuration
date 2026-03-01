@@ -4,17 +4,18 @@ return {
   priority = 1000,
   config = function()
     require("transparent").setup({
-   extra_groups = {
-    "NormalFloat",
-    "FloatBorder",
-    "WhichKey",
-    "WhichKeyFloat",
-    "WhichKeyBorder",
-    "WhichKeyDesc",
-    "WhichKeyGroup",
-    "WhichKeySeparator",
-    "WhichKeyValue",
-  },     exclude_groups = {
+      extra_groups = {
+        "NormalFloat",
+        "FloatBorder",
+        "WhichKey",
+        "WhichKeyFloat",
+        "WhichKeyBorder",
+        "WhichKeyDesc",
+        "WhichKeyGroup",
+        "WhichKeySeparator",
+        "WhichKeyValue",
+      },
+      exclude_groups = {
         -- main bar
         "BufferLineFill",
         "BufferLineBackground",

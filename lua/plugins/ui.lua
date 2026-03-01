@@ -297,6 +297,22 @@ return {
             bold = true,
           },
 
+          duplicate_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            italic = false,
+          },
+
+          -- duplicate_visible = {
+          --   fg = active_text_color,
+          --   bg = active_bg_color,
+          -- },
+          --
+          -- duplicate = {
+          --   fg = active_text_color,
+          --   bg = active_bg_color,
+          -- },
+
           -- Diagnostic styles for the actual icon/text next to the filename
           diagnostic_selected = {
             fg = active_text_color,
