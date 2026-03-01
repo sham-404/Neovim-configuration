@@ -226,7 +226,8 @@ return {
     config = function()
       -- Define your colors here for easy tweaking
       local active_text_color = "#000000" -- black
-      local active_bg_color = "#74c7ec" -- cyan
+      local active_bg_color = "#B7A0C9"
+      local inactive_bg_color = "#111111"
 
       require("bufferline").setup({
         options = {
@@ -244,6 +245,49 @@ return {
             bg = active_bg_color,
             bold = true,
             italic = false,
+          },
+          background = {
+            bg = inactive_bg_color, -- your chosen gray
+          },
+
+          buffer = {
+            bg = inactive_bg_color,
+          },
+
+          buffer_visible = {
+            bg = inactive_bg_color,
+          },
+
+          separator = {
+            bg = inactive_bg_color,
+          },
+
+          separator_visible = {
+            bg = inactive_bg_color,
+          },
+
+          close_button = {
+            bg = inactive_bg_color,
+          },
+
+          close_button_visible = {
+            bg = inactive_bg_color,
+          },
+
+          numbers = {
+            bg = inactive_bg_color,
+          },
+
+          numbers_visible = {
+            bg = inactive_bg_color,
+          },
+
+          duplicate = {
+            bg = inactive_bg_color,
+          },
+
+          duplicate_visible = {
+            bg = inactive_bg_color,
           },
 
           separator_selected = {
@@ -314,6 +358,7 @@ return {
           -- },
 
           -- Diagnostic styles for the actual icon/text next to the filename
+
           diagnostic_selected = {
             fg = active_text_color,
             bg = active_bg_color,
