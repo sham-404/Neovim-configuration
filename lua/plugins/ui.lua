@@ -141,6 +141,8 @@ return {
           icon = ""
         end
 
+        icon = icon .. " "
+
         local hl_group = "LualineBatOk"
 
         if percent <= 15 then
@@ -150,7 +152,7 @@ return {
         end
 
         if stat == "Charging" then
-          icon = " " .. icon
+          icon = "" .. icon
           hl_group = "LualineBatChg"
         end
 
@@ -170,7 +172,7 @@ return {
       end
 
       local function hl(name, fg)
-        vim.api.nvim_set_hl(0, name, { fg = fg, bg = "#000000" })
+        vim.api.nvim_set_hl(0, name, { fg = fg, bg = "#010101" })
       end
 
       -- Progress
