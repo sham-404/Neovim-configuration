@@ -243,6 +243,7 @@ return {
       local active_text_color = "#000000"
       local active_bg_color = "#B7A0C9"
       local inactive_bg_color = "#111111"
+      local bg_color = "#060606"
 
       require("bufferline").setup({
 
@@ -261,7 +262,7 @@ return {
           -- ==================================================
 
           fill = {
-            bg = "#060606",
+            bg = bg_color,
           },
 
           background = {
@@ -306,18 +307,18 @@ return {
 
           -- Inactive → Inactive
           separator = {
-            fg = "#060606",
+            fg = bg_color,
             bg = inactive_bg_color,
           },
 
           separator_visible = {
-            fg = "#060606",
+            fg = bg_color,
             bg = inactive_bg_color,
           },
 
           -- Inactive → Active (THIS IS THE IMPORTANT ONE)
           separator_selected = {
-            fg = "#060606",
+            fg = bg_color,
             bg = active_bg_color,
           },
 
