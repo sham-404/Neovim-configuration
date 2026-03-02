@@ -46,8 +46,6 @@ return {
     },
   },
 
-  -- Lualine (modified)
-
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -56,6 +54,7 @@ return {
     config = function()
       local function ram_usage()
         local mem = {}
+
         for line in io.lines("/proc/meminfo") do
           local k, v = line:match("(%w+):%s+(%d+)")
           if k and v then
@@ -95,6 +94,7 @@ return {
       local function smart_progress()
         local current = vim.fn.line(".")
         local total = vim.fn.line("$")
+
         if total == 0 then
           return ""
         end
@@ -107,6 +107,7 @@ return {
         local base = "/sys/class/power_supply"
         local handle = io.popen("ls " .. base .. " | grep BAT")
         local bat = handle and handle:read("*l")
+
         if handle then
           handle:close()
         end
@@ -117,17 +118,19 @@ return {
 
         local capacity = io.open(base .. "/" .. bat .. "/capacity")
         local status = io.open(base .. "/" .. bat .. "/status")
+
         if not capacity or not status then
           return "%#LualineBatLow# ?"
         end
 
         local percent = tonumber(capacity:read("*l"))
         local stat = status:read("*l")
+
         capacity:close()
         status:close()
 
-        -- Pick icon by percentage
         local icon = ""
+
         if percent <= 10 then
           icon = ""
         elseif percent <= 30 then
@@ -139,6 +142,7 @@ return {
         end
 
         local hl_group = "LualineBatOk"
+
         if percent <= 15 then
           hl_group = "LualineBatLow"
         elseif percent <= 35 then
@@ -150,11 +154,12 @@ return {
           hl_group = "LualineBatChg"
         end
 
-        return string.format("%%#%s#%s  %d%%%%", hl_group, icon, percent)
+        return string.format("%%#%s#%s %d%%%%", hl_group, icon, percent)
       end
 
       local function system_status()
         local sep = "%#LualineSep#  "
+
         local text = table.concat({
           smart_progress(),
           battery(),
@@ -169,27 +174,28 @@ return {
       end
 
       -- Progress
-      hl("LualineProg", "#89b4fa") -- soft blue
+      hl("LualineProg", "#89b4fa")
 
       -- Battery states
-      hl("LualineBatOk", "#a6e3a1") -- green
-      hl("LualineBatMid", "#f9e2af") -- yellow
-      hl("LualineBatLow", "#f38ba8") -- red
-      hl("LualineBatChg", "#89dceb") -- cyan
+      hl("LualineBatOk", "#a6e3a1")
+      hl("LualineBatMid", "#f9e2af")
+      hl("LualineBatLow", "#f38ba8")
+      hl("LualineBatChg", "#89dceb")
 
       -- RAM states
-      hl("LualineRamOk", "#cdd6f4") -- neutral
-      hl("LualineRamMid", "#f9e2af") -- yellow
-      hl("LualineRamHigh", "#f38ba8") -- red
+      hl("LualineRamOk", "#cdd6f4")
+      hl("LualineRamMid", "#f9e2af")
+      hl("LualineRamHigh", "#f38ba8")
 
-      --      vim.api.nvim_set_hl(0, "StatusLine", { bg = "#000000" })
-      --      vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "#000000" })
-
-      -- Separator color
+      -- Separator
       hl("LualineSep", "#cdd6f4")
 
       require("lualine").setup({
-        options = { theme = "auto", globalstatus = true },
+        options = {
+          theme = "auto",
+          globalstatus = true,
+        },
+
         sections = {
           lualine_c = {
             {
@@ -211,10 +217,16 @@ return {
             },
           },
 
-          lualine_z = { { clock, padding = { left = 1, right = 1 } } },
+          lualine_z = {
+            { clock, padding = { left = 1, right = 1 } },
+          },
         },
 
-        inactive_sections = { lualine_c = {}, lualine_y = {}, lualine_z = {} },
+        inactive_sections = {
+          lualine_c = {},
+          lualine_y = {},
+          lualine_z = {},
+        },
       })
     end,
   },
@@ -223,13 +235,17 @@ return {
     "akinsho/bufferline.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
     event = "VeryLazy",
+
     config = function()
-      -- Define your colors here for easy tweaking
-      local active_text_color = "#000000" -- black
+      -- =========================
+      -- Color Definitions
+      -- =========================
+      local active_text_color = "#000000"
       local active_bg_color = "#B7A0C9"
       local inactive_bg_color = "#111111"
 
       require("bufferline").setup({
+
         options = {
           always_show_bufferline = true,
           mode = "buffers",
@@ -237,17 +253,19 @@ return {
           diagnostics = "nvim_lsp",
           indicator = { style = "icon" },
         },
+
         highlights = {
 
-          -- 1. Main Selected Buffer Text
-          buffer_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
-            bold = true,
-            italic = false,
+          -- ==================================================
+          -- Base Background Layer (VERY IMPORTANT FOR SLANT)
+          -- ==================================================
+
+          fill = {
+            bg = "#060606",
           },
+
           background = {
-            bg = inactive_bg_color, -- your chosen gray
+            bg = inactive_bg_color,
           },
 
           buffer = {
@@ -255,22 +273,6 @@ return {
           },
 
           buffer_visible = {
-            bg = inactive_bg_color,
-          },
-
-          separator = {
-            bg = inactive_bg_color,
-          },
-
-          separator_visible = {
-            bg = inactive_bg_color,
-          },
-
-          close_button = {
-            bg = inactive_bg_color,
-          },
-
-          close_button_visible = {
             bg = inactive_bg_color,
           },
 
@@ -290,20 +292,84 @@ return {
             bg = inactive_bg_color,
           },
 
+          close_button = {
+            bg = inactive_bg_color,
+          },
+
+          close_button_visible = {
+            bg = inactive_bg_color,
+          },
+
+          -- ==================================================
+          -- Slant Separator Control (Glyph Fix Section)
+          -- ==================================================
+
+          -- Inactive → Inactive
+          separator = {
+            fg = "#060606",
+            bg = inactive_bg_color,
+          },
+
+          separator_visible = {
+            fg = "#060606",
+            bg = inactive_bg_color,
+          },
+
+          -- Inactive → Active (THIS IS THE IMPORTANT ONE)
           separator_selected = {
             fg = "#060606",
             bg = active_bg_color,
           },
 
-          -- 3. The Indicator (Left side icon/bar)
+          -- Tabs (still generated internally)
+          tab_separator = {
+            fg = inactive_bg_color,
+            bg = inactive_bg_color,
+          },
+
+          tab_separator_selected = {
+            fg = active_bg_color,
+            bg = inactive_bg_color,
+          },
+
+          -- ==================================================
+          -- Selected Buffer Styling
+          -- ==================================================
+
+          buffer_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            bold = true,
+            italic = false,
+          },
+
+          duplicate_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            italic = false,
+          },
+
+          close_button_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            sp = active_text_color,
+            bold = true,
+          },
+
           indicator_selected = {
             fg = active_text_color,
             bg = active_bg_color,
           },
 
           modified_selected = {
-            fg = "#a61818", -- Keep reddish text for modified status
-            bg = active_bg_color, -- Force background to remain cyan
+            fg = "#a61818",
+            bg = active_bg_color,
+          },
+
+          diagnostic_selected = {
+            fg = active_text_color,
+            bg = active_bg_color,
+            bold = true,
           },
 
           error_selected = {
@@ -331,37 +397,6 @@ return {
             fg = active_text_color,
             bg = active_bg_color,
             sp = active_text_color,
-            bold = true,
-          },
-
-          close_button_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
-            sp = active_text_color,
-            bold = true,
-          },
-
-          duplicate_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
-            italic = false,
-          },
-
-          -- duplicate_visible = {
-          --   fg = active_text_color,
-          --   bg = active_bg_color,
-          -- },
-          --
-          -- duplicate = {
-          --   fg = active_text_color,
-          --   bg = active_bg_color,
-          -- },
-
-          -- Diagnostic styles for the actual icon/text next to the filename
-
-          diagnostic_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
             bold = true,
           },
         },
