@@ -35,21 +35,6 @@ return {
         "BufferLineDevIconDefault",
         "BufferLineDevIconSelected",
         "BufferLineDevIconVisible",
-
-        -- protect lualine core
-        "StatusLine",
-        "StatusLineNC",
-
-        -- protect your custom lualine highlights
-        "LualineProg",
-        "LualineBatOk",
-        "LualineBatMid",
-        "LualineBatLow",
-        "LualineBatChg",
-        "LualineRamOk",
-        "LualineRamMid",
-        "LualineRamHigh",
-        "LualineSep",
       },
     })
   end,
