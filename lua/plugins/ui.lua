@@ -47,6 +47,7 @@ return {
   },
 
   {
+
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
@@ -192,9 +193,35 @@ return {
       -- Separator
       hl("LualineSep", "#cdd6f4")
 
+      local custom_theme = {
+        normal = {
+          a = { fg = "#010101", bg = "#89b4fa", gui = "bold" },
+          b = { fg = "#cdd6f4", bg = "#010101" },
+          c = { fg = "#cdd6f4", bg = "#1f2233" },
+        },
+        insert = {
+          a = { fg = "#010101", bg = "#a6e3a1", gui = "bold" },
+        },
+        visual = {
+          a = { fg = "#010101", bg = "#f9e2af", gui = "bold" },
+        },
+        replace = {
+          a = { fg = "#010101", bg = "#f38ba8", gui = "bold" },
+        },
+        command = {
+          a = { fg = "#010101", bg = "#89dceb", gui = "bold" },
+        },
+        inactive = {
+          a = { fg = "#6c7086", bg = "#010101" },
+          b = { fg = "#6c7086", bg = "#010101" },
+          c = { fg = "#6c7086", bg = "#010101" },
+        },
+      }
+
       require("lualine").setup({
+
         options = {
-          theme = "auto",
+          theme = custom_theme,
           globalstatus = true,
         },
 
