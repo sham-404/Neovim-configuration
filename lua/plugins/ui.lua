@@ -396,6 +396,10 @@ return {
             bg = active_bg_color,
           },
 
+          modified = {
+            bg = inactive_bg_color,
+          },
+
           diagnostic_selected = {
             fg = active_text_color,
             bg = active_bg_color,
