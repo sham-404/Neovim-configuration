@@ -277,6 +277,7 @@ return {
       require("bufferline").setup({
 
         options = {
+          tab_size = 14,
           always_show_bufferline = true,
           mode = "buffers",
           separator_style = "slant",
