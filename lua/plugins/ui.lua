@@ -266,15 +266,34 @@ return {
     event = "VeryLazy",
 
     config = function()
-      -- =========================
-      -- Color Definitions
-      -- =========================
-      local active_text_color = "#000000"
-      local active_bg_color = "#B7A0C9"
-      local inactive_bg_color = "#111111"
-      local bg_color = "#060606"
+      --------------------------------------------------
+      -- Color Palette
+      --------------------------------------------------
+
+      local colors = {
+        active_text = "#000000",
+        --active_bg = "#a4f5f1",
+        active_bg = "#676767",
+
+        inactive_bg = "#111111",
+        bar_bg = "#060606",
+
+        error = "#a61818",
+        warning = "#ee4500",
+        hint = "#a4f5f1",
+
+        modified = "#c3e88d",
+      }
+
+      --------------------------------------------------
+      -- Bufferline Setup
+      --------------------------------------------------
 
       require("bufferline").setup({
+
+        ------------------------------------------------
+        -- Options
+        ------------------------------------------------
 
         options = {
           tab_size = 14,
@@ -282,156 +301,166 @@ return {
           mode = "buffers",
           separator_style = "slant",
           diagnostics = "nvim_lsp",
-          indicator = { style = "icon" },
+
+          -- indicator = { style = "icon" },
+
+          --   diagnostics_indicator = function(_, _, diag)
+          --     local ret = ""
+          --
+          --     if diag.error then
+          --       ret = ret .. "  " .. diag.error
+          --     end
+          --
+          --     if diag.warning then
+          --       ret = ret .. "  " .. diag.warning
+          --     end
+          --
+          --     return ret
+          --   end,
         },
+
+        ------------------------------------------------
+        -- Highlights
+        ------------------------------------------------
 
         highlights = {
 
-          -- ==================================================
-          -- Base Background Layer (VERY IMPORTANT FOR SLANT)
-          -- ==================================================
+          ------------------------------------------------
+          -- Base Layer
+          ------------------------------------------------
 
-          fill = {
-            bg = bg_color,
-          },
+          fill = { bg = colors.bar_bg },
 
-          background = {
-            bg = inactive_bg_color,
-          },
+          background = { bg = colors.inactive_bg },
+          buffer = { bg = colors.inactive_bg },
+          buffer_visible = { bg = colors.inactive_bg },
 
-          buffer = {
-            bg = inactive_bg_color,
-          },
+          numbers = { bg = colors.inactive_bg },
+          numbers_visible = { bg = colors.inactive_bg },
 
-          buffer_visible = {
-            bg = inactive_bg_color,
-          },
+          duplicate = { bg = colors.inactive_bg },
+          duplicate_visible = { bg = colors.inactive_bg },
 
-          numbers = {
-            bg = inactive_bg_color,
-          },
+          close_button = { bg = colors.inactive_bg },
+          close_button_visible = { bg = colors.inactive_bg },
 
-          numbers_visible = {
-            bg = inactive_bg_color,
-          },
+          modified = { bg = colors.inactive_bg },
 
-          duplicate = {
-            bg = inactive_bg_color,
-          },
+          ------------------------------------------------
+          -- Separators
+          ------------------------------------------------
 
-          duplicate_visible = {
-            bg = inactive_bg_color,
-          },
-
-          close_button = {
-            bg = inactive_bg_color,
-          },
-
-          close_button_visible = {
-            bg = inactive_bg_color,
-          },
-
-          -- ==================================================
-          -- Slant Separator Control (Glyph Fix Section)
-          -- ==================================================
-
-          -- Inactive → Inactive
           separator = {
-            fg = bg_color,
-            bg = inactive_bg_color,
+            fg = colors.bar_bg,
+            bg = colors.inactive_bg,
           },
 
           separator_visible = {
-            fg = bg_color,
-            bg = inactive_bg_color,
+            fg = colors.bar_bg,
+            bg = colors.inactive_bg,
           },
 
-          -- Inactive → Active (THIS IS THE IMPORTANT ONE)
           separator_selected = {
-            fg = bg_color,
-            bg = active_bg_color,
+            fg = colors.bar_bg,
+            bg = colors.active_bg,
           },
 
-          -- Tabs (still generated internally)
           tab_separator = {
-            fg = inactive_bg_color,
-            bg = inactive_bg_color,
+            fg = colors.inactive_bg,
+            bg = colors.inactive_bg,
           },
 
           tab_separator_selected = {
-            fg = active_bg_color,
-            bg = inactive_bg_color,
+            fg = colors.active_bg,
+            bg = colors.inactive_bg,
           },
 
-          -- ==================================================
-          -- Selected Buffer Styling
-          -- ==================================================
+          ------------------------------------------------
+          -- Inactive Buffers
+          ------------------------------------------------
+
+          diagnostic = {
+            fg = colors.warning,
+            bg = colors.inactive_bg,
+          },
+
+          error = {
+            fg = colors.error,
+            bg = colors.inactive_bg,
+            bold = true,
+          },
+
+          warning = {
+            fg = colors.warning,
+            bg = colors.inactive_bg,
+          },
+
+          hint = {
+            fg = colors.hint,
+            bg = colors.inactive_bg,
+          },
+
+          ------------------------------------------------
+          -- Selected Buffer
+          ------------------------------------------------
 
           buffer_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
-            bold = true,
-            italic = false,
-          },
-
-          duplicate_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
-            italic = false,
-          },
-
-          close_button_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
-            sp = active_text_color,
+            fg = colors.active_text,
+            bg = colors.active_bg,
             bold = true,
           },
 
           indicator_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
+            fg = colors.active_text,
+            bg = colors.active_bg,
+          },
+
+          close_button_selected = {
+            fg = colors.active_text,
+            bg = colors.active_bg,
+            bold = true,
+          },
+
+          duplicate_selected = {
+            fg = colors.active_text,
+            bg = colors.active_bg,
           },
 
           modified_selected = {
-            fg = "#a61818",
-            bg = active_bg_color,
+            fg = colors.modified,
+            bg = colors.active_bg,
           },
 
-          modified = {
-            bg = inactive_bg_color,
-          },
+          ------------------------------------------------
+          -- Selected Diagnostics
+          ------------------------------------------------
 
           diagnostic_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
+            fg = colors.active_text,
+            bg = colors.active_bg,
             bold = true,
           },
 
           error_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
-            sp = active_text_color,
+            fg = colors.error,
+            bg = colors.active_bg,
             bold = true,
           },
 
           warning_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
-            sp = active_text_color,
+            fg = colors.warning,
+            bg = colors.active_bg,
             bold = true,
           },
 
           info_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
-            sp = active_text_color,
-            bold = true,
+            fg = colors.active_text,
+            bg = colors.active_bg,
           },
 
           hint_selected = {
-            fg = active_text_color,
-            bg = active_bg_color,
-            sp = active_text_color,
+            fg = colors.hint,
+            bg = colors.active_bg,
             bold = true,
           },
         },
