@@ -267,22 +267,26 @@ return {
 
     config = function()
       --------------------------------------------------
-      -- Color Palette
+      -- Color Palette (your vibe, refined)
       --------------------------------------------------
 
       local colors = {
-        active_text = "#000000",
-        --active_bg = "#a4f5f1",
-        active_bg = "#676767",
+        -- Backgrounds
+        bar_bg = "#050505",
+        inactive_bg = "#101010",
+        active_bg = "#3a3a3a",
 
-        inactive_bg = "#111111",
-        bar_bg = "#060606",
+        -- Text
+        active_text = "#cccccc",
+        inactive_text = "#7a7a7a",
 
-        error = "#a61818",
-        warning = "#ee4500",
-        hint = "#a4f5f1",
+        -- Diagnostics
+        error = "#ff5f5f",
+        warning = "#ffaf5f",
+        hint = "#8be9fd",
 
-        modified = "#c3e88d",
+        -- Extras
+        modified = "#a6e3a1",
       }
 
       --------------------------------------------------
@@ -291,37 +295,13 @@ return {
 
       require("bufferline").setup({
 
-        ------------------------------------------------
-        -- Options
-        ------------------------------------------------
-
         options = {
           tab_size = 14,
           always_show_bufferline = true,
           mode = "buffers",
           separator_style = "slant",
           diagnostics = "nvim_lsp",
-
-          -- indicator = { style = "icon" },
-
-          --   diagnostics_indicator = function(_, _, diag)
-          --     local ret = ""
-          --
-          --     if diag.error then
-          --       ret = ret .. "  " .. diag.error
-          --     end
-          --
-          --     if diag.warning then
-          --       ret = ret .. "  " .. diag.warning
-          --     end
-          --
-          --     return ret
-          --   end,
         },
-
-        ------------------------------------------------
-        -- Highlights
-        ------------------------------------------------
 
         highlights = {
 
@@ -331,20 +311,20 @@ return {
 
           fill = { bg = colors.bar_bg },
 
-          background = { bg = colors.inactive_bg },
-          buffer = { bg = colors.inactive_bg },
-          buffer_visible = { bg = colors.inactive_bg },
+          background = { fg = colors.inactive_text, bg = colors.inactive_bg },
+          buffer = { fg = colors.inactive_text, bg = colors.inactive_bg },
+          buffer_visible = { fg = colors.inactive_text, bg = colors.inactive_bg },
 
-          numbers = { bg = colors.inactive_bg },
-          numbers_visible = { bg = colors.inactive_bg },
+          numbers = { fg = colors.inactive_text, bg = colors.inactive_bg },
+          numbers_visible = { fg = colors.inactive_text, bg = colors.inactive_bg },
 
-          duplicate = { bg = colors.inactive_bg },
-          duplicate_visible = { bg = colors.inactive_bg },
+          duplicate = { fg = colors.inactive_text, bg = colors.inactive_bg },
+          duplicate_visible = { fg = colors.inactive_text, bg = colors.inactive_bg },
 
-          close_button = { bg = colors.inactive_bg },
-          close_button_visible = { bg = colors.inactive_bg },
+          close_button = { fg = colors.inactive_text, bg = colors.inactive_bg },
+          close_button_visible = { fg = colors.inactive_text, bg = colors.inactive_bg },
 
-          modified = { bg = colors.inactive_bg },
+          modified = { fg = colors.modified, bg = colors.inactive_bg },
 
           ------------------------------------------------
           -- Separators
@@ -376,7 +356,7 @@ return {
           },
 
           ------------------------------------------------
-          -- Inactive Buffers
+          -- Inactive Buffers (Diagnostics)
           ------------------------------------------------
 
           diagnostic = {
@@ -387,7 +367,6 @@ return {
           error = {
             fg = colors.error,
             bg = colors.inactive_bg,
-            bold = true,
           },
 
           warning = {
@@ -463,10 +442,266 @@ return {
             bg = colors.active_bg,
             bold = true,
           },
+
+          ------------------------------------------------
+          -- Visible Buffers
+          ------------------------------------------------
+
+          error_visible = {
+            fg = colors.error,
+            bg = colors.inactive_bg,
+          },
+
+          warning_visible = {
+            fg = colors.warning,
+            bg = colors.inactive_bg,
+          },
+
+          info_visible = {
+            fg = colors.active_text,
+            bg = colors.inactive_bg,
+          },
+
+          hint_visible = {
+            fg = colors.hint,
+            bg = colors.inactive_bg,
+          },
         },
       })
     end,
   },
+
+  -- {
+  --   "akinsho/bufferline.nvim",
+  --   dependencies = "nvim-tree/nvim-web-devicons",
+  --   event = "VeryLazy",
+  --
+  --   config = function()
+  --     --------------------------------------------------
+  --     -- Color Palette
+  --     --------------------------------------------------
+  --
+  --     local colors = {
+  --       active_text = "#000000",
+  --       --active_bg = "#a4f5f1",
+  --       active_bg = "#676767",
+  --
+  --       inactive_bg = "#111111",
+  --       bar_bg = "#060606",
+  --
+  --       error = "#a61818",
+  --       warning = "#ee4500",
+  --       hint = "#a4f5f1",
+  --
+  --       modified = "#c3e88d",
+  --     }
+  --
+  --     --------------------------------------------------
+  --     -- Bufferline Setup
+  --     --------------------------------------------------
+  --
+  --     require("bufferline").setup({
+  --
+  --       ------------------------------------------------
+  --       -- Options
+  --       ------------------------------------------------
+  --
+  --       options = {
+  --         tab_size = 14,
+  --         always_show_bufferline = true,
+  --         mode = "buffers",
+  --         separator_style = "slant",
+  --         diagnostics = "nvim_lsp",
+  --
+  --         -- indicator = { style = "icon" },
+  --
+  --         --   diagnostics_indicator = function(_, _, diag)
+  --         --     local ret = ""
+  --         --
+  --         --     if diag.error then
+  --         --       ret = ret .. "  " .. diag.error
+  --         --     end
+  --         --
+  --         --     if diag.warning then
+  --         --       ret = ret .. "  " .. diag.warning
+  --         --     end
+  --         --
+  --         --     return ret
+  --         --   end,
+  --       },
+  --
+  --       ------------------------------------------------
+  --       -- Highlights
+  --       ------------------------------------------------
+  --
+  --       highlights = {
+  --
+  --         ------------------------------------------------
+  --         -- Base Layer
+  --         ------------------------------------------------
+  --
+  --         fill = { bg = colors.bar_bg },
+  --
+  --         background = { bg = colors.inactive_bg },
+  --         buffer = { bg = colors.inactive_bg },
+  --         buffer_visible = { bg = colors.inactive_bg },
+  --
+  --         numbers = { bg = colors.inactive_bg },
+  --         numbers_visible = { bg = colors.inactive_bg },
+  --
+  --         duplicate = { bg = colors.inactive_bg },
+  --         duplicate_visible = { bg = colors.inactive_bg },
+  --
+  --         close_button = { bg = colors.inactive_bg },
+  --         close_button_visible = { bg = colors.inactive_bg },
+  --
+  --         modified = { bg = colors.inactive_bg },
+  --
+  --         ------------------------------------------------
+  --         -- Separators
+  --         ------------------------------------------------
+  --
+  --         separator = {
+  --           fg = colors.bar_bg,
+  --           bg = colors.inactive_bg,
+  --         },
+  --
+  --         separator_visible = {
+  --           fg = colors.bar_bg,
+  --           bg = colors.inactive_bg,
+  --         },
+  --
+  --         separator_selected = {
+  --           fg = colors.bar_bg,
+  --           bg = colors.active_bg,
+  --         },
+  --
+  --         tab_separator = {
+  --           fg = colors.inactive_bg,
+  --           bg = colors.inactive_bg,
+  --         },
+  --
+  --         tab_separator_selected = {
+  --           fg = colors.active_bg,
+  --           bg = colors.inactive_bg,
+  --         },
+  --
+  --         ------------------------------------------------
+  --         -- Inactive Buffers
+  --         ------------------------------------------------
+  --
+  --         diagnostic = {
+  --           fg = colors.warning,
+  --           bg = colors.inactive_bg,
+  --         },
+  --
+  --         error = {
+  --           fg = colors.error,
+  --           bg = colors.inactive_bg,
+  --           bold = true,
+  --         },
+  --
+  --         warning = {
+  --           fg = colors.warning,
+  --           bg = colors.inactive_bg,
+  --         },
+  --
+  --         hint = {
+  --           fg = colors.hint,
+  --           bg = colors.inactive_bg,
+  --         },
+  --
+  --         ------------------------------------------------
+  --         -- Selected Buffer
+  --         ------------------------------------------------
+  --
+  --         buffer_selected = {
+  --           fg = colors.active_text,
+  --           bg = colors.active_bg,
+  --           bold = true,
+  --         },
+  --
+  --         indicator_selected = {
+  --           fg = colors.active_text,
+  --           bg = colors.active_bg,
+  --         },
+  --
+  --         close_button_selected = {
+  --           fg = colors.active_text,
+  --           bg = colors.active_bg,
+  --           bold = true,
+  --         },
+  --
+  --         duplicate_selected = {
+  --           fg = colors.active_text,
+  --           bg = colors.active_bg,
+  --         },
+  --
+  --         modified_selected = {
+  --           fg = colors.modified,
+  --           bg = colors.active_bg,
+  --         },
+  --
+  --         ------------------------------------------------
+  --         -- Selected Diagnostics
+  --         ------------------------------------------------
+  --
+  --         diagnostic_selected = {
+  --           fg = colors.active_text,
+  --           bg = colors.active_bg,
+  --           bold = true,
+  --         },
+  --
+  --         error_selected = {
+  --           fg = colors.error,
+  --           bg = colors.active_bg,
+  --           bold = true,
+  --         },
+  --
+  --         warning_selected = {
+  --           fg = colors.warning,
+  --           bg = colors.active_bg,
+  --           bold = true,
+  --         },
+  --
+  --         info_selected = {
+  --           fg = colors.active_text,
+  --           bg = colors.active_bg,
+  --         },
+  --
+  --         hint_selected = {
+  --           fg = colors.hint,
+  --           bg = colors.active_bg,
+  --           bold = true,
+  --         },
+  --
+  --         ------------------------------------------------
+  --         -- Visible Buffers
+  --         ------------------------------------------------
+  --
+  --         error_visible = {
+  --           fg = colors.error,
+  --           bg = colors.inactive_bg,
+  --         },
+  --
+  --         warning_visible = {
+  --           fg = colors.warning,
+  --           bg = colors.inactive_bg,
+  --         },
+  --
+  --         info_visible = {
+  --           fg = colors.active_text,
+  --           bg = colors.inactive_bg,
+  --         },
+  --
+  --         hint_visible = {
+  --           fg = colors.hint,
+  --           bg = colors.inactive_bg,
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- },
 
   {
     "lukas-reineke/indent-blankline.nvim",
