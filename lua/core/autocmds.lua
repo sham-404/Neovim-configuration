@@ -47,3 +47,20 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 --     vim.opt.guicursor = "n-v-c:block-Cursor,i:block-iCursor,r:block-Cursor"
 --   end
 -- })
+
+-- Automatically save and restore folds for every file
+local fold_group = vim.api.nvim_create_augroup("RememberFolds", { clear = true })
+
+-- Save the fold state when you leave a buffer
+vim.api.nvim_create_autocmd("BufWinLeave", {
+  group = fold_group,
+  pattern = "?*",
+  command = "silent! mkview",
+})
+
+-- Load the fold state when you open a buffer
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  group = fold_group,
+  pattern = "?*",
+  command = "silent! loadview",
+})
