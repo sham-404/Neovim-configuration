@@ -81,8 +81,7 @@ return {
 
     -- 4. Setup Mason-LSPConfig (The Glue)
     require("mason-lspconfig").setup({
-      ensure_installed = vim.tbl_keys(servers),
-      automatic_installation = true,
+      automatic_installation = false,
 
       handlers = {
         function(server_name)
